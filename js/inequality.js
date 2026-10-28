@@ -39,13 +39,13 @@ function draw() {
   current = stats.indicators.find(item => item.key === selectedIndicator);
   if (!current) return;
   document.getElementById("meta").textContent = `${current.year} · ${current.unit}`;
-  document.getElementById("coverage").textContent = `자료 있음 ${current.available}개 / 결측 ${current.missing}개` + ((selectedIndicator === "GRDP_2022" || selectedIndicator === "EMPLOYEES_2024") ? " (시 단위 통합 기준)" : "");
+  document.getElementById("coverage").textContent = `자료 있음 ${current.available}개 / 결측 ${current.missing}개`;
   drawLegend(current);
   if (shapes) map.removeLayer(shapes);
-  const displayFeatures = (selectedIndicator === "GRDP_2022" || selectedIndicator === "EMPLOYEES_2024") ? window.cityFeatures : window.geoFeatures;
+  const displayFeatures = window.geoFeatures;
   shapes = L.geoJSON(displayFeatures, {
     style(feature) {
-      const record = feature.properties.CITY_GROUP ? stats.city_records[String(feature.properties.SIGUNGU_CD)] : stats.records[String(feature.properties.SIGUNGU_CD)];
+      const record = stats.records[String(feature.properties.SIGUNGU_CD)];
       const value = record ? record[current.key] : null;
       const index = classIndex(value, current.breaks);
       return { color: "#ffffff", weight: 0.75, fillOpacity: 0.88, fillColor: index < 0 ? MISSING_COLOR : COLORS[index] };
@@ -53,11 +53,11 @@ function draw() {
     onEachFeature(feature, layer) {
       layer.on("click", event => {
         const p = feature.properties;
-        const record = p.CITY_GROUP ? stats.city_records[String(p.SIGUNGU_CD)] : stats.records[String(p.SIGUNGU_CD)];
+        const record = stats.records[String(p.SIGUNGU_CD)];
         const value = record ? record[current.key] : null;
         const name = `${p.SIDO_NM} ${p.SIGUNGU_NM}`;
         const valText = value === null || value === undefined ? "자료 없음 (NULL)" : `${fmt(value)} ${current.unit}`;
-        const scopeText = p.CITY_GROUP ? "<div>시 전체 기준 (일반구 통합)</div>" : "";
+        const scopeText = "";
         L.popup().setLatLng(event.latlng).setContent(`<strong>${name}</strong><div>${current.name}</div><strong>${valText}</strong>${scopeText}<div>${current.year} 기준</div>`).openOn(map);
       });
       layer.on("mouseover", () => layer.setStyle({ weight: 1.7, color: "#34475c" }));
@@ -67,10 +67,8 @@ function draw() {
 }
 Promise.all([
   fetch("data/korea_50m.geojson").then(r => { if (!r.ok) throw Error("GeoJSON 파일을 찾을 수 없습니다."); return r.json(); }),
-  fetch("data/korea_city_merged.geojson").then(r => { if (!r.ok) throw Error("통합 경계 파일을 찾을 수 없습니다."); return r.json(); }),
   fetch("data/statistics_map.json").then(r => { if (!r.ok) throw Error("통계 파일을 찾을 수 없습니다."); return r.json(); })
-]).then(([geo, cityGeo, stat]) => {
-  window.cityFeatures = cityGeo;
+ ]).then(([geo, stat]) => {
   window.geoFeatures = geo;
   stats = stat;
   stats.indicators.forEach(indicator => {

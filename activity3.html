@@ -350,6 +350,26 @@
         .layout-wide>.panel {
             width: 100%
         }
+
+        /* 면(폴리곤) 단위 공간 패턴 시각화 */
+        .area-grid{display:grid;grid-template-columns:repeat(var(--grid-size),1fr);aspect-ratio:1;width:100%;background:#fff;border:1px solid #b8d4d2;overflow:hidden;border-radius:6px}
+        .area-cell{border:1px solid #d3e4e3;background:#f8fbfb;min-width:0;min-height:0;transition:background-color .16s ease}
+        .area-cell.active{background:#16877b;border-color:#f8fbfb}
+        .area-grid-small{--grid-size:5;max-width:230px;margin:auto}
+        .area-grid-large{--grid-size:10;max-width:420px;margin:auto}
+        .pattern-lab{margin-top:26px;border:1px solid #d8e8e5;border-radius:16px;padding:24px;background:#f8fcfb}
+        .lab-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+        .lab-heading h2{margin-bottom:4px}.lab-heading p{margin:0}
+        .lab-counter{white-space:nowrap;color:#167d72;background:#e4f5f0;padding:9px 12px;border-radius:9px;font-size:12px}
+        .lab-content{display:grid;grid-template-columns:minmax(230px,420px) minmax(220px,1fr);align-items:center;justify-content:center;gap:32px;max-width:930px;margin:auto}
+        .lab-controls{min-width:0}.pattern-state{font-weight:800;font-size:21px;color:#167d72}
+        .lab-controls p{min-height:52px}.slider-label{display:block;margin:18px 0 8px;font-weight:750;font-size:14px}
+        #pattern-slider{width:100%;accent-color:#16877b;cursor:pointer}
+        .slider-markers{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#647986;margin-top:8px}
+        .reset-pattern{border:1px solid #16877b;background:#fff;color:#16877b;border-radius:8px;padding:9px 14px;font-weight:750;cursor:pointer;margin-top:24px}
+        .reset-pattern:hover{background:#e4f5f0}
+        .lab-note{font-size:12px;color:#72858b;line-height:1.65;margin-top:20px}
+        @media(max-width:720px){.lab-content{grid-template-columns:1fr}.lab-heading{align-items:flex-start;flex-direction:column}.pattern-lab{padding:17px}}
     </style>
 </head>
 
@@ -363,160 +383,96 @@
         <main class="layout layout-wide">
             <section class="panel">
                 <h2>공간적 패턴의 세 가지 유형</h2>
-                <p>아래 점들은 공간적 분포의 형태를 단순화한 예시입니다. 실제 단계구분도에서는 비슷한 값을 가진 지역들이 어디에, 어떻게 분포하는지 살펴보세요.</p>
-                <div class="pattern-grid">
-                    <article class="pattern-card"><svg aria-hidden="true" class="pattern-svg" viewbox="0 0 100 100">
-                            <circle cx="12.0" cy="28.5" r="2.4"></circle>
-                            <circle cx="38.0" cy="29.0" r="2.4"></circle>
-                            <circle cx="31.6" cy="15.5" r="2.4"></circle>
-                            <circle cx="27.4" cy="26.9" r="2.4"></circle>
-                            <circle cx="39.7" cy="32.7" r="2.4"></circle>
-                            <circle cx="29.8" cy="23.4" r="2.4"></circle>
-                            <circle cx="21.3" cy="30.9" r="2.4"></circle>
-                            <circle cx="43.7" cy="11.2" r="2.4"></circle>
-                            <circle cx="5.0" cy="51.8" r="2.4"></circle>
-                            <circle cx="46.9" cy="38.0" r="2.4"></circle>
-                            <circle cx="34.1" cy="27.0" r="2.4"></circle>
-                            <circle cx="26.5" cy="18.7" r="2.4"></circle>
-                            <circle cx="36.6" cy="29.1" r="2.4"></circle>
-                            <circle cx="10.0" cy="25.9" r="2.4"></circle>
-                            <circle cx="24.5" cy="24.4" r="2.4"></circle>
-                            <circle cx="50.6" cy="42.7" r="2.4"></circle>
-                            <circle cx="5.0" cy="36.4" r="2.4"></circle>
-                            <circle cx="84.5" cy="82.2" r="2.4"></circle>
-                            <circle cx="81.7" cy="47.3" r="2.4"></circle>
-                            <circle cx="82.6" cy="69.1" r="2.4"></circle>
-                            <circle cx="88.8" cy="73.3" r="2.4"></circle>
-                            <circle cx="57.5" cy="88.0" r="2.4"></circle>
-                            <circle cx="60.8" cy="80.2" r="2.4"></circle>
-                            <circle cx="78.0" cy="62.5" r="2.4"></circle>
-                            <circle cx="49.5" cy="59.2" r="2.4"></circle>
-                            <circle cx="63.7" cy="66.4" r="2.4"></circle>
-                            <circle cx="71.1" cy="85.5" r="2.4"></circle>
-                            <circle cx="77.8" cy="80.7" r="2.4"></circle>
-                            <circle cx="61.1" cy="63.7" r="2.4"></circle>
-                            <circle cx="83.1" cy="78.7" r="2.4"></circle>
-                            <circle cx="80.6" cy="63.6" r="2.4"></circle>
-                            <circle cx="62.2" cy="87.0" r="2.4"></circle>
-                            <circle cx="66.0" cy="64.2" r="2.4"></circle>
-                            <circle cx="89.7" cy="69.0" r="2.4"></circle>
-                            <circle cx="61.5" cy="32.2" r="2.4"></circle>
-                            <circle cx="66.0" cy="37.0" r="2.4"></circle>
-                            <circle cx="66.9" cy="14.5" r="2.4"></circle>
-                            <circle cx="94.2" cy="36.4" r="2.4"></circle>
-                            <circle cx="69.7" cy="21.9" r="2.4"></circle>
-                            <circle cx="54.0" cy="17.0" r="2.4"></circle>
-                            <circle cx="54.7" cy="32.3" r="2.4"></circle>
-                            <circle cx="80.9" cy="19.7" r="2.4"></circle>
-                            <circle cx="62.9" cy="27.2" r="2.4"></circle>
-                            <circle cx="67.9" cy="28.7" r="2.4"></circle>
-                            <circle cx="73.3" cy="27.4" r="2.4"></circle>
-                            <circle cx="74.8" cy="12.6" r="2.4"></circle>
-                            <circle cx="75.6" cy="5.0" r="2.4"></circle>
-                            <circle cx="69.2" cy="20.0" r="2.4"></circle>
-                            <circle cx="71.9" cy="21.0" r="2.4"></circle>
-                            <circle cx="70.5" cy="5.0" r="2.4"></circle>
-                            <circle cx="62.4" cy="14.5" r="2.4"></circle>
-                        </svg>
-                        <h3>군집형 (Clustered)</h3>
-                        <p>특정 위치 주변에 집중하여 나타나는 분포입니다.</p>
-                    </article>
-                    <article class="pattern-card"><svg aria-hidden="true" class="pattern-svg" viewbox="0 0 100 100">
-                            <circle cx="10.3" cy="11.3" r="2.4"></circle>
-                            <circle cx="27.5" cy="12.0" r="2.4"></circle>
-                            <circle cx="42.1" cy="12.1" r="2.4"></circle>
-                            <circle cx="55.7" cy="12.2" r="2.4"></circle>
-                            <circle cx="72.9" cy="12.9" r="2.4"></circle>
-                            <circle cx="86.6" cy="12.9" r="2.4"></circle>
-                            <circle cx="12.2" cy="31.1" r="2.4"></circle>
-                            <circle cx="26.8" cy="32.9" r="2.4"></circle>
-                            <circle cx="43.0" cy="29.9" r="2.4"></circle>
-                            <circle cx="56.3" cy="29.8" r="2.4"></circle>
-                            <circle cx="71.5" cy="29.1" r="2.4"></circle>
-                            <circle cx="88.0" cy="31.3" r="2.4"></circle>
-                            <circle cx="11.7" cy="50.6" r="2.4"></circle>
-                            <circle cx="26.3" cy="49.3" r="2.4"></circle>
-                            <circle cx="43.7" cy="49.2" r="2.4"></circle>
-                            <circle cx="57.5" cy="48.5" r="2.4"></circle>
-                            <circle cx="74.0" cy="50.0" r="2.4"></circle>
-                            <circle cx="86.2" cy="48.4" r="2.4"></circle>
-                            <circle cx="12.4" cy="67.1" r="2.4"></circle>
-                            <circle cx="27.1" cy="65.8" r="2.4"></circle>
-                            <circle cx="42.3" cy="67.8" r="2.4"></circle>
-                            <circle cx="58.1" cy="66.8" r="2.4"></circle>
-                            <circle cx="71.8" cy="67.0" r="2.4"></circle>
-                            <circle cx="87.1" cy="66.9" r="2.4"></circle>
-                            <circle cx="10.0" cy="84.1" r="2.4"></circle>
-                            <circle cx="29.0" cy="86.3" r="2.4"></circle>
-                            <circle cx="41.9" cy="86.0" r="2.4"></circle>
-                            <circle cx="55.8" cy="84.1" r="2.4"></circle>
-                            <circle cx="72.1" cy="85.8" r="2.4"></circle>
-                            <circle cx="85.1" cy="84.9" r="2.4"></circle>
-                        </svg>
-                        <h3>균등형 (Uniform)</h3>
-                        <p>서로 일정한 간격을 유지하며 나타나는 분포입니다.</p>
-                    </article>
-                    <article class="pattern-card"><svg aria-hidden="true" class="pattern-svg" viewbox="0 0 100 100">
-                            <circle cx="84.1" cy="59.4" r="2.4"></circle>
-                            <circle cx="91.4" cy="16.3" r="2.4"></circle>
-                            <circle cx="84.3" cy="78.3" r="2.4"></circle>
-                            <circle cx="10.2" cy="53.1" r="2.4"></circle>
-                            <circle cx="71.8" cy="26.7" r="2.4"></circle>
-                            <circle cx="62.5" cy="79.4" r="2.4"></circle>
-                            <circle cx="74.7" cy="44.0" r="2.4"></circle>
-                            <circle cx="12.9" cy="53.3" r="2.4"></circle>
-                            <circle cx="23.8" cy="53.3" r="2.4"></circle>
-                            <circle cx="30.6" cy="37.2" r="2.4"></circle>
-                            <circle cx="53.7" cy="76.8" r="2.4"></circle>
-                            <circle cx="89.9" cy="42.1" r="2.4"></circle>
-                            <circle cx="8.6" cy="71.0" r="2.4"></circle>
-                            <circle cx="36.5" cy="71.6" r="2.4"></circle>
-                            <circle cx="77.8" cy="10.8" r="2.4"></circle>
-                            <circle cx="69.4" cy="31.9" r="2.4"></circle>
-                            <circle cx="35.0" cy="36.1" r="2.4"></circle>
-                            <circle cx="53.2" cy="28.4" r="2.4"></circle>
-                            <circle cx="49.5" cy="31.8" r="2.4"></circle>
-                            <circle cx="18.5" cy="29.0" r="2.4"></circle>
-                            <circle cx="65.2" cy="34.1" r="2.4"></circle>
-                            <circle cx="24.8" cy="38.7" r="2.4"></circle>
-                            <circle cx="25.9" cy="90.7" r="2.4"></circle>
-                            <circle cx="74.1" cy="20.7" r="2.4"></circle>
-                            <circle cx="32.7" cy="44.6" r="2.4"></circle>
-                            <circle cx="52.4" cy="40.6" r="2.4"></circle>
-                            <circle cx="52.0" cy="71.9" r="2.4"></circle>
-                            <circle cx="20.9" cy="55.0" r="2.4"></circle>
-                            <circle cx="21.8" cy="52.9" r="2.4"></circle>
-                            <circle cx="34.6" cy="75.5" r="2.4"></circle>
-                            <circle cx="82.0" cy="88.4" r="2.4"></circle>
-                            <circle cx="42.2" cy="59.8" r="2.4"></circle>
-                            <circle cx="22.2" cy="67.8" r="2.4"></circle>
-                            <circle cx="73.4" cy="43.9" r="2.4"></circle>
-                            <circle cx="35.0" cy="71.7" r="2.4"></circle>
-                            <circle cx="71.0" cy="75.1" r="2.4"></circle>
-                            <circle cx="32.2" cy="28.4" r="2.4"></circle>
-                            <circle cx="29.1" cy="24.0" r="2.4"></circle>
-                            <circle cx="8.6" cy="18.3" r="2.4"></circle>
-                            <circle cx="49.4" cy="44.2" r="2.4"></circle>
-                            <circle cx="82.7" cy="39.8" r="2.4"></circle>
-                            <circle cx="22.3" cy="86.2" r="2.4"></circle>
-                            <circle cx="14.1" cy="36.5" r="2.4"></circle>
-                            <circle cx="72.1" cy="35.0" r="2.4"></circle>
-                            <circle cx="89.0" cy="70.5" r="2.4"></circle>
-                        </svg>
-                        <h3>랜덤형 (Random)</h3>
-                        <p>뚜렷한 집중이나 규칙적인 간격 없이 나타나는 분포입니다.</p>
-                    </article>
+                <p>각 격자는 하나의 공간 단위를 나타냅니다. 청록색은 특정 현상이 나타나거나 값이 높은 지역을 의미합니다. 색칠된 격자의 수가 같더라도 배열에 따라 공간적 패턴이 달라집니다.</p>
+                <div class="pattern-grid" id="pattern-examples">
+                    <article class="pattern-card"><div class="area-grid area-grid-small" id="sample-cluster" role="img" aria-label="군집형 5×5 격자"></div><h3>군집형 (Clustered)</h3><p>비슷한 특성을 가진 지역들이 서로 이웃하여 모여 있는 분포입니다.</p></article>
+                    <article class="pattern-card"><div class="area-grid area-grid-small" id="sample-dispersed" role="img" aria-label="균등형 5×5 격자"></div><h3>균등형 (Dispersed)</h3><p>해당 지역들이 서로 떨어져 비교적 고르게 분포합니다.</p></article>
+                    <article class="pattern-card"><div class="area-grid area-grid-small" id="sample-random" role="img" aria-label="무작위형 5×5 격자"></div><h3>무작위형 (Random)</h3><p>뚜렷한 집중이나 규칙 없이 불규칙하게 나타나는 분포입니다.</p></article>
                 </div>
-                <div class="example"><strong>단계구분도에서는 어떻게 관찰할까?</strong>
-                    <p>높은 값의 지역들이 서로 이웃하여 모여 있다면 <b>군집하는 경향</b>을 의심할 수 있습니다. 반대로 지역들이 고르게 떨어져 있거나 특별한 규칙 없이 흩어져 있는지도 비교해
-                        보세요.</p>
+                <div class="pattern-lab">
+                    <div class="lab-heading"><div><h2>공간적 패턴 변화 실험</h2><p>슬라이더를 움직여 같은 30개 지역이 어떻게 배열되는지 살펴보세요.</p></div><span class="lab-counter">색칠된 지역 <b>30 / 100</b></span></div>
+                    <div class="lab-content">
+                        <div class="area-grid area-grid-large" id="interactive-grid" role="img" aria-label="공간적 패턴 변화 10×10 격자"></div>
+                        <div class="lab-controls"><div class="pattern-state" id="pattern-state" aria-live="polite">군집형에 가까운 분포</div><p id="pattern-description">높은 값의 지역이 서로 인접하여 나타납니다.</p>
+                            <label for="pattern-slider" class="slider-label">공간적 배열 변화</label>
+                            <input type="range" id="pattern-slider" min="0" max="100" step="1" value="0" aria-label="군집형에서 무작위형을 거쳐 균등형으로 변화하는 슬라이더" />
+                            <div class="slider-markers"><span>군집형</span><span>무작위형</span><span>균등형</span></div>
+                            <button type="button" class="reset-pattern" id="reset-pattern">처음으로</button>
+                            <div class="lab-note">※ 실제 통계 분석 결과가 아닌 교육용 모형입니다. 패턴은 점진적으로 변화하도록 구성했으며, 실제 지역의 공간적 자기상관을 계산한 것은 아닙니다.</div>
+                        </div>
+                    </div>
                 </div>
+                <div class="example"><strong>단계구분도에서는 어떻게 관찰할까?</strong><p>비슷한 값의 지역이 서로 인접하면 군집 경향을, 서로 떨어져 비교적 고르게 나타나면 분산 경향을 생각해 볼 수 있습니다. 실제 지도에서는 지역의 크기와 이웃 관계도 함께 고려해 보세요.</p></div>
             </section>
         </main>
         <div class="page-bottom"><a class="nav-button" href="activity2.html">← 활동 2: 공간 불평등 지도</a><a
                 class="nav-button primary" href="activity4.html">활동 4: 지리 데이터 수집 →</a></div>
         <footer>공간 불평등 탐구 · 활동 3</footer>
     </div>
+
+    <script>
+    (() => {
+      const gridSize = 10;
+      const coloredCount = 30;
+      // 재현 가능한 의사 난수: 새로고침해도 동일한 패턴
+      function shuffled(size, seed) {
+        const a = Array.from({length:size}, (_,i)=>i);
+        let x = seed >>> 0;
+        for(let i=a.length-1;i>0;i--){x=(Math.imul(1664525,x)+1013904223)>>>0;const j=x%(i+1);[a[i],a[j]]=[a[j],a[i]];}
+        return a;
+      }
+      function dispersed(size, count){
+        // 가장 가까운 선택 셀과의 거리를 최대화하는 간단한 탐욕적 분산 배치
+        const selected=[0], candidates=new Set(Array.from({length:size*size},(_,i)=>i).slice(1));
+        while(selected.length<count){let best=-1,score=-1;
+          for(const idx of candidates){const row=Math.floor(idx/size),col=idx%size;
+            const d=Math.min(...selected.map(k=>Math.abs(row-Math.floor(k/size))+Math.abs(col-k%size)));
+            const tie=((idx*37+13)%101)/1000;
+            if(d+tie>score){score=d+tie;best=idx;}}
+          selected.push(best);candidates.delete(best);
+        }
+        return selected;
+      }
+      const clustered=[];
+      for(let r=2;r<7;r++)for(let c=1;c<7;c++)clustered.push(r*10+c);
+      const random=shuffled(100,4217).slice(0,coloredCount);
+      const uniform=dispersed(10,coloredCount);
+      const samples={
+        'sample-cluster':[0,1,2,5,6,7,10,11,12],
+        'sample-dispersed':[0,3,6,9,12,15,18,21,24],
+        'sample-random':[1,4,5,8,11,13,17,19,22]
+      };
+      function makeGrid(el,size,active){el.style.setProperty('--grid-size',size);const activeSet=new Set(active);
+        const frag=document.createDocumentFragment();for(let i=0;i<size*size;i++){
+          const cell=document.createElement('span');cell.className='area-cell'+(activeSet.has(i)?' active':'');frag.appendChild(cell);
+        }el.replaceChildren(frag);
+      }
+      for(const [id,positions] of Object.entries(samples))makeGrid(document.getElementById(id),5,positions);
+      const target=document.getElementById('interactive-grid');
+      const slider=document.getElementById('pattern-slider');
+      const label=document.getElementById('pattern-state');
+      const description=document.getElementById('pattern-description');
+      // 출발과 도착 패턴의 차이를 한 셀씩 교환해 개수를 일정하게 유지
+      function interpolate(a,b,t){const keep=new Set(a.filter(x=>b.includes(x)));
+        const remove=a.filter(x=>!keep.has(x));const add=b.filter(x=>!keep.has(x));
+        const swaps=Math.round(Math.max(0,Math.min(1,t))*remove.length);
+        return [...keep,...remove.slice(swaps),...add.slice(0,swaps)];
+      }
+      function update(){const v=Number(slider.value);
+        const cells=v<=50?interpolate(clustered,random,v/50):interpolate(random,uniform,(v-50)/50);
+        makeGrid(target,gridSize,cells);
+        if(v<25){label.textContent='군집형에 가까운 분포';description.textContent='높은 값의 지역이 서로 이웃하여 모여 있습니다.';}
+        else if(v<45){label.textContent='군집이 약해지는 분포';description.textContent='인접한 지역들이 점차 떨어지면서 집중이 약해집니다.';}
+        else if(v<=55){label.textContent='무작위형에 가까운 분포';description.textContent='뚜렷한 집중이나 규칙성이 없는 배열입니다.';}
+        else if(v<80){label.textContent='점차 고르게 퍼지는 분포';description.textContent='지역들이 서로 떨어져 공간 전반으로 퍼집니다.';}
+        else{label.textContent='균등형에 가까운 분포';description.textContent='높은 값의 지역이 비교적 고른 간격으로 나타납니다.';}
+        target.setAttribute('aria-label',`10×10 격자 중 30개 색칠됨. ${label.textContent}`);
+      }
+      slider.addEventListener('input',update);
+      document.getElementById('reset-pattern').addEventListener('click',()=>{slider.value=0;update();});
+      update();
+    })();
+    </script>
 </body>
 
 </html>

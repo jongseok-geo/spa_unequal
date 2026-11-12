@@ -366,6 +366,10 @@
         .lab-controls p{min-height:52px}.slider-label{display:block;margin:18px 0 8px;font-weight:750;font-size:14px}
         #pattern-slider{width:100%;accent-color:#16877b;cursor:pointer}
         .slider-markers{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#647986;margin-top:8px}
+        .moran-explain{font-size:13px;line-height:1.7;color:#405967;background:#eaf7f3;border-radius:9px;padding:12px 14px;margin-top:18px}
+        .moran-scale{display:flex;justify-content:space-between;gap:6px;font-size:12px;font-weight:750;color:#247e78;margin-top:9px}
+        .moran-scale span:nth-child(2){text-align:center}
+        .moran-scale span:last-child{text-align:right}
         .reset-pattern{border:1px solid #16877b;background:#fff;color:#16877b;border-radius:8px;padding:9px 14px;font-weight:750;cursor:pointer;margin-top:24px}
         .reset-pattern:hover{background:#e4f5f0}
         .lab-note{font-size:12px;color:#72858b;line-height:1.65;margin-top:20px}
@@ -394,15 +398,22 @@
                     <div class="lab-content">
                         <div class="area-grid area-grid-large" id="interactive-grid" role="img" aria-label="공간적 패턴 변화 10×10 격자"></div>
                         <div class="lab-controls"><div class="pattern-state" id="pattern-state" aria-live="polite">군집형에 가까운 분포</div><p id="pattern-description">높은 값의 지역이 서로 인접하여 나타납니다.</p>
-                            <label for="pattern-slider" class="slider-label">공간적 배열 변화</label>
+                            <div class="moran-explain"><strong>모란의 I 지수(Moran's I)</strong>는 인접한 지역들의 값이 얼마나 비슷하거나 다른지를 나타내는 공간적 자기상관 지표입니다.</div>
+                            <label for="pattern-slider" class="slider-label">공간적 배열 변화 · 모란의 I 개념적 비교</label>
                             <input type="range" id="pattern-slider" min="0" max="100" step="1" value="0" aria-label="군집형에서 무작위형을 거쳐 균등형으로 변화하는 슬라이더" />
                             <div class="slider-markers"><span>군집형</span><span>무작위형</span><span>균등형</span></div>
+                            <div class="moran-scale"><span>+1 부근 · 양의 상관</span><span>0 부근</span><span>−1 부근 · 음의 상관</span></div>
                             <button type="button" class="reset-pattern" id="reset-pattern">처음으로</button>
-                            <div class="lab-note">※ 실제 통계 분석 결과가 아닌 교육용 모형입니다. 패턴은 점진적으로 변화하도록 구성했으며, 실제 지역의 공간적 자기상관을 계산한 것은 아닙니다.</div>
+                            <div class="lab-note">※ 위 숫자는 패턴의 개념적 방향을 나타내며 실제 계산값이 아닙니다. 모란의 I는 공간가중치와 자료에 따라 가능한 범위가 달라지고, 무작위 분포의 기대값도 정확히 0은 아닙니다. 이 격자에서는 실제 모란의 I를 계산하지 않습니다.</div>
                         </div>
                     </div>
                 </div>
-                <div class="example"><strong>단계구분도에서는 어떻게 관찰할까?</strong><p>비슷한 값의 지역이 서로 인접하면 군집 경향을, 서로 떨어져 비교적 고르게 나타나면 분산 경향을 생각해 볼 수 있습니다. 실제 지도에서는 지역의 크기와 이웃 관계도 함께 고려해 보세요.</p></div>
+                <div class="example">
+                    <strong>단계구분도에서는 어떻게 관찰할까?</strong>
+                    <p>비슷한 값의 지역이 서로 인접하면 군집 경향을, 서로 떨어져 비교적 고르게 나타나면 분산 경향을 생각해 볼 수 있습니다. 실제 지도에서는 지역의 크기와 이웃 관계도 함께 고려해 보세요.</p>
+                    <p><b>공간적 자기상관</b>은 가까운 지역들의 통계값이 서로 관련되어 나타나는 정도를 뜻합니다. 비슷한 값끼리 이웃하면 양(+), 서로 다른 값끼리 이웃하면 음(−)의 공간적 자기상관이 나타납니다.</p>
+                    <p><b>모란의 I 지수(Moran's I)</b>는 이러한 공간적 자기상관을 수치로 나타내는 지표입니다. 일반적으로 양수는 유사한 값의 군집, 음수는 서로 다른 값의 인접, 0 부근은 뚜렷한 공간적 자기상관이 약함을 뜻합니다.</p>
+                </div>
             </section>
         </main>
         <div class="page-bottom"><a class="nav-button" href="activity2.html">← 활동 2: 공간 불평등 지도</a><a
